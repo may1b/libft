@@ -6,15 +6,15 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:22:41 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/13 21:53:20 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/14 14:00:06 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-unsigned int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -22,17 +22,17 @@ unsigned int	ft_strlen(char *str)
 	return (i);
 }
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	src_len;
-	unsigned int	dst_len;
+	size_t	i;
+	size_t	j;
+	size_t	src_len;
+	size_t	dst_len;
 
 	j = 0;
-	dst_len = ft_strlen(dest);
+	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
 	i = dst_len;
 	if (size == 0)
@@ -42,11 +42,11 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	else
 	{
 		while (src[j] && (dst_len + j) < size)
-			dest[i++] = src[j++];
+			dst[i++] = src[j++];
 		if ((dst_len + j) == size && dst_len < size)
-			dest[--i] = '\0';
+			dst[--i] = '\0';
 		else
-			dest[i] = '\0';
+			dst[i] = '\0';
 		return (src_len + dst_len);
 	}
 }
