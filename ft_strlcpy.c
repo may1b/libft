@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 03:21:09 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/13 21:52:26 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/16 00:38:24 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,22 @@
  * @param size - sizeof(dest) ([n] characters to copy + NUL-terminator)
  * @return strlen(src) (size of src string)
 */
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+#include <stddef.h>
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (i < size && src[i] != '\0')
 	{
-		dest[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
 	while (src[i] != '\0')
 		i++;
 	if (size)
-		dest[size - 1] = '\0';
+		dst[size - 1] = '\0';
 	return (i);
 }
 // typedef struct {
