@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 03:21:09 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/16 00:38:24 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/18 13:42:59 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@
 //     memcpy (dest, src, src_length + 1);
 //   return src_length;
 // }
+
+#include "libft.h"
+
 /**
  * @param dest - The destination buffer
  * @param src  - The string to copy (has to be NUL-terminated)
  * @param size - sizeof(dest) ([n] characters to copy + NUL-terminator)
  * @return strlen(src) (size of src string)
 */
-#include <stddef.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
