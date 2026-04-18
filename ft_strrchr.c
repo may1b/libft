@@ -12,9 +12,9 @@
 
 #include <stddef.h>
 
-char	*strrchr(const char *s, int c);
+char	*ft_strrchr(const char *s, int c);
 
-char	*strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	size_t	strlen_;
 
@@ -39,7 +39,7 @@ int	main(int argc, char *argv[])
 	printf("YOU PROVIDED: `%s`\n", argv[1]);
 	printf("IN WHICH THE LAST OCCURENCE THY SHALL BE: '%c'\n", argv[2][0]);
 	printf("IS THY FOUDING CORRECT?\n THE ANSWER:\n`%s`\n",
-		strrchr(argv[1], argv[2][0]));
+		ft_strrchr(argv[1], argv[2][0]));
 }
 
 #endif
