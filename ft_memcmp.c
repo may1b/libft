@@ -12,12 +12,8 @@
 
 #include <stddef.h>
 #include <stdint.h>
-
 #ifdef TESTING
-# include <string.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <limits.h>
+# include "libft.h"
 #endif
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -33,6 +29,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	while (i < n && area1[i] == area2[i])
 		i++;
+	if (i == n)
+		return (0);
 	return (area1[i] - area2[i]);
 }
 
@@ -48,8 +46,6 @@ typedef struct s_test {
 	char	*area2;
 	size_t	n;
 }	t_test;
-
-# define TESTS {"","",0},{"a","a",1},{"abc","abc",3},{"a","b",1}
 
 bool	run_test(t_test test)
 {
@@ -81,7 +77,8 @@ void	print_tests(size_t n, bool results[static n], t_test tests[static n])
 
 int	main(void)
 {
-	static t_test	tests[] = {TESTS};
+	static t_test	tests[] = {{"", "", 0}, {"a", "a", 1},
+	{"abc", "abc", 3}, {"a", "b", 1}};
 	bool			results[(sizeof(tests) / sizeof(t_test))];
 	size_t			i;
 
