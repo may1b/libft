@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/20 17:39:10 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/20 20:21:39 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 # define LIBFT_H
 # include <stddef.h>
+# include <stdlib.h>
 # ifdef TESTING
 #  include <stdio.h>
 #  include <stdbool.h>
@@ -64,6 +65,8 @@ int		ft_isalnum(int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 int		ft_atoi(const char *nptr);
+
+void	*ft_calloc(size_t nmemb, size_t size);
 
 # ifdef TESTING
 
