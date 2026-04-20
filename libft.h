@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/20 17:27:02 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/20 17:39:10 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		ft_isalnum(int c);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
-int		atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
 
 # ifdef TESTING
 
