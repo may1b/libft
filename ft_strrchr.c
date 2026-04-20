@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include "libft.h"
 
 char	*ft_strrchr(const char *s, int c);
 
@@ -21,25 +22,51 @@ char	*ft_strrchr(const char *s, int c)
 	strlen_ = 0;
 	while (s[strlen_])
 		strlen_++;
-	if (c == '\0')
+	if ((unsigned char)c == '\0')
 		return ((char *)&s[strlen_]);
-	while (strlen_ && s[strlen_] != c)
+	while (strlen_)
+	{
 		strlen_--;
-	return ((char *)&s[strlen_]);
+		if (s[strlen_] == (unsigned char)c)
+			return ((char *)&s[strlen_]);
+	}
+	return (NULL);
 }
 
-#if 0
+#ifdef TESTING
 
-// # include <stdio.h>
+typedef struct s_test {
+	char	*s;
+	int		c;
+}	t_test;
 
-int	main(int argc, char *argv[])
+static bool	run_test(t_test t)
 {
-	if (argc != 3)
-		return (printf("YOU SHALL PROVIDE 2 ARGUMENTS!\n"), 1);
-	printf("YOU PROVIDED: `%s`\n", argv[1]);
-	printf("IN WHICH THE LAST OCCURENCE THY SHALL BE: '%c'\n", argv[2][0]);
-	printf("IS THY FOUDING CORRECT?\n THE ANSWER:\n`%s`\n",
-		ft_strrchr(argv[1], argv[2][0]));
+	return (ft_strrchr(t.s, t.c) == strrchr(t.s, t.c));
+}
+
+int	main(void)
+{
+	static t_test	tests[] = {
+	{"hello", 'l'}, {"hello", 'o'}, {"hello", 'z'},
+	{"hello", '\0'}, {"abcabc", 'b'}, {"ababa", 'a'}};
+	size_t			count;
+	size_t			passed;
+	size_t			i;
+	bool			ok;
+
+	count = sizeof(tests) / sizeof(t_test);
+	passed = 0;
+	i = 0;
+	while (i < count)
+	{
+		ok = run_test(tests[i]);
+		ft_print_line(i, count, ok);
+		passed += ok;
+		i++;
+	}
+	ft_print_summary("ft_strrchr", passed, count);
+	return (passed != count);
 }
 
 #endif
