@@ -10,102 +10,73 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <string.h>
-// size_t
-// __strlcpy (char *__restrict dest, const char *__restrict src, size_t size)
-// {
-//   size_t src_length = strlen (src);
-//   if (__glibc_unlikely (src_length >= size))
-//     {
-//       if (size > 0)
-// 	{
-// 	  /* Copy the leading portion of the string.  The last
-// 	     character is subsequently overwritten with the NUL
-// 	     terminator, but the destination size is usually a
-// 	     multiple of a small power of two, so writing it twice
-// 	     should be more efficient than copying an odd number of
-// 	     bytes.  */
-// 	  memcpy (dest, src, size);
-// 	  dest[size - 1] = '\0';
-// 	}
-//     }
-//   else
-//     /* Copy the string and its terminating NUL character.  */
-//     memcpy (dest, src, src_length + 1);
-//   return src_length;
-// }
-
 #include "libft.h"
 
-/**
- * @param dest - The destination buffer
- * @param src  - The string to copy (has to be NUL-terminated)
- * @param size - sizeof(dest) ([n] characters to copy + NUL-terminator)
- * @return strlen(src) (size of src string)
-*/
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	unsigned int	i;
+	size_t	i;
+	size_t	src_len;
 
+	src_len = 0;
+	while (src[src_len])
+		src_len++;
+	if (size == 0)
+		return (src_len);
 	i = 0;
-	while (i < size && src[i] != '\0')
+	while (i < size - 1 && src[i])
 	{
 		dst[i] = src[i];
 		i++;
 	}
-	while (src[i] != '\0')
-		i++;
-	if (size)
-		dst[size - 1] = '\0';
-	return (i);
+	dst[i] = '\0';
+	return (src_len);
 }
-// typedef struct {
-// 	char src[20];
-// 	size_t size;
-// 	char	dest[40];
-// } Test;
-// typedef struct {
-// 	char s[20];
-// } S;
-// #include <stdlib.h>
-// #include <string.h>
-// #include <unistd.h>
-// int	main(void)
-// {
-// 	Test tests[5] = {0};
-// 	Test testsCopy[5] = {0};
-// 	*((S*)&tests[0].src) = (S){"World!"};
-// 	tests[0].size = 10;
-// 	*((S*)&tests[1].src) = (S){"Hello, World!"};
-// 	tests[1].size = 10;
-// 	*((S*)&tests[2].src) = (S){"Hello, World!"};
-// 	tests[2].size = 5;
-// 	*((S*)&tests[3].src) = (S){"Hello, World!"};
-// 	tests[2].size = 1;
-// 	*((S*)&tests[4].src) = (S){"Hello, World!"};
-// 	tests[2].size = 0;
 
-// 	memcpy(testsCopy, tests, sizeof(testsCopy));
-// 	for (size_t i = 0; i < 5; ++i) {
-// 		Test* ft_currentTest = &tests[i];
-// 		Test* currentTest = &testsCopy[i];
-// 		ft_strlcpy(ft_currentTest->dest,
-//           ft_currentTest->src, ft_currentTest->size);
-// 		glibc_strlcpy(currentTest->dest, currentTest->src, currentTest->size);
-// 		write(1, "Test ", 5);
-// 		char num = i + '1';
-// 		write(1, &num, 1);
-// 		write(1, " out of 5\n", 10);
-// 		if (memcmp(currentTest->dest, ft_currentTest->dest, 40) != 0) {
-// 			write(1, "Expected:\n", 10);
-// 			write(1, currentTest->dest, 40);
-// 			write(1, "\n", 1);
-// 			write(1, "But got:\n", 9);
-// 			write(1, ft_currentTest->dest, 40);
-// 			write(1, "\n", 1);
-// 		} else {
-// 			write(1, "Perfect 11/10\n", 14);
-// 		}
-// 	}
-// }
+#ifdef TESTING
+
+typedef struct s_test {
+	char	src[32];
+	size_t	size;
+}	t_test;
+
+static bool	run_test(t_test t)
+{
+	char	fd[64];
+	char	ld[64];
+	size_t	fr;
+	size_t	lr;
+
+	memset(fd, 0xCC, 64);
+	memset(ld, 0xCC, 64);
+	fr = ft_strlcpy(fd, t.src, t.size);
+	lr = strlcpy(ld, t.src, t.size);
+	return (fr == lr && memcmp(fd, ld, 64) == 0);
+}
+
+int	main(void)
+{
+	static t_test	tests[] = {
+	{{"Hello"}, 10}, {{"Hello"}, 3}, {{"Hello"}, 0},
+	{{"Hello"}, 6}, {{"Hi"}, 10}};
+	size_t			count;
+	size_t			passed;
+	size_t			i;
+	bool			ok;
+
+	count = sizeof(tests) / sizeof(t_test);
+	passed = 0;
+	i = 0;
+	while (i < count)
+	{
+		ok = run_test(tests[i]);
+		ft_print_line(i, count, ok);
+		passed += ok;
+		i++;
+	}
+	ft_print_summary("ft_strlcpy", passed, count);
+	return (passed != count);
+}
+
+#endif
