@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/20 20:30:33 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/20 20:45:01 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,15 @@ void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+// Used in ft_split implementation
+typedef struct s_str_da {
+	char	**items;
+	size_t	size;
+	size_t	cap;
+}	t_str_da;
+
+char	**ft_split(char *str, char *charset);
 
 # ifdef TESTING
 
