@@ -14,6 +14,14 @@
 
 # define LIBFT_H
 # include <stddef.h>
+# ifdef TESTING
+#  include <stdio.h>
+#  include <stdbool.h>
+#  include <string.h>
+#  define FT_GREEN "\x1b[32m"
+#  define FT_RED "\x1b[31m"
+#  define FT_RESET "\x1b[0m"
+# endif
 
 int		ft_isalpha(int c);
 
@@ -52,5 +60,25 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 
 int		ft_isalnum(int c);
+
+# ifdef TESTING
+
+static void	ft_print_line(size_t idx, size_t total, bool ok)
+{
+	if (ok)
+		printf(FT_GREEN "%zu/%zu: PASS" FT_RESET "\n", idx + 1, total);
+	else
+		printf(FT_RED "%zu/%zu: FAIL" FT_RESET "\n", idx + 1, total);
+}
+
+static void	ft_print_summary(const char *name, size_t p, size_t t)
+{
+	printf("\n%s: ", name);
+	if (p == t)
+		printf(FT_GREEN "%zu/%zu passed" FT_RESET "\n\n", p, t);
+	else
+		printf(FT_RED "%zu/%zu passed" FT_RESET "\n\n", p, t);
+}
+# endif
 
 #endif
