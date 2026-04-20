@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/20 20:45:01 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/20 21:39:02 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_str_da {
 }	t_str_da;
 
 char	**ft_split(char *str, char *charset);
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 # ifdef TESTING
 
