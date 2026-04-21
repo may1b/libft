@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 14:30:44 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 14:50:43 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # define LIBFT_H
 # include <stddef.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # ifdef TESTING
 #  include <stdio.h>
-#  include <stdbool.h>
 #  include <string.h>
 #  define FT_GREEN "\x1b[32m"
 #  define FT_RED "\x1b[31m"
@@ -86,6 +86,8 @@ char	**ft_split(char *str, char *charset);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+
+char	*ft_strtrim(char const *s1, char const *set);
 
 # ifdef TESTING
 
