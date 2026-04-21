@@ -6,12 +6,13 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:40:41 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 18:33:38 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 18:38:07 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stddef.h>
+#include <string.h>
 #define DA_INIT_CAP 5000
 
 static void	str_da_append(t_str_da *da, char *str);
@@ -55,6 +56,8 @@ char	**ft_split(char *str, char *charset)
 		if (pos > 0)
 		{
 			new_str = strn_alloc_and_cpy(&str[i], pos);
+			if (!new_str)
+				return (NULL);
 			str_da_append(&da, new_str);
 			pos += ft_strlen(charset);
 		}
@@ -70,6 +73,8 @@ static char	*strn_alloc_and_cpy(char *str, size_t until)
 	char	*new_str;
 
 	new_str = malloc(until + 1);
+	if (!new_str)
+		return (NULL);
 	i = 0;
 	while (i < until)
 	{
@@ -107,6 +112,8 @@ static void	str_da_append(t_str_da *da, char *str)
 	{
 		da->cap *= 2;
 		new_ptr = malloc(sizeof(char **) * da->cap);
+		if (!new_ptr)
+			return ;
 		i = 0;
 		while (i < da->size)
 		{
