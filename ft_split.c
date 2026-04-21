@@ -6,21 +6,15 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:40:41 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 20:23:29 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 21:44:15 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
-#include <string.h>
-#define DA_INIT_CAP	10 
 
-static void	str_da_append(t_str_da *da, char *str);
-static long	find_in_str(char *haystack, char *needle);
-static char	*strn_alloc_and_cpy(char *str, size_t until);
 /*
-// Code which i once wrote:
-// Not sure why i used uint16_t instead of size_t
+Code which i once wrote:
+Not sure why i used uint16_t instead of size_t
 ArrayListSV splitSVByChar(SV sv, char splitBy)
 {
     ArrayListSV svList = $initArrayList(SV);
@@ -32,7 +26,6 @@ ArrayListSV splitSVByChar(SV sv, char splitBy)
             prevSplit = i + 1;
         }
     }
-    // Add the last segment after the final delimiter
     if (prevSplit < sv.len) {
         SV slicedSv = svSlice(sv, prevSplit, sv.len - prevSplit);
         $append((&svList), slicedSv);
@@ -41,87 +34,97 @@ ArrayListSV splitSVByChar(SV sv, char splitBy)
 }
 */
 
-char	**ft_split(char *str, char *charset)
+static size_t	count_toks(char *s, char *cs, size_t cs_len)
 {
-	size_t		i;
-	size_t		pos;
-	t_str_da	da;
-	char		*new_str;
+	size_t	n;
+	size_t	i;
 
-	da = (t_str_da){malloc(DA_INIT_CAP * sizeof(char **)), 0, DA_INIT_CAP};
+	n = 0;
 	i = 0;
-	while (find_in_str(&str[i], charset) != -1)
+	while (s[i])
 	{
-		pos = find_in_str(&str[i], charset);
-		if (pos > 0)
+		while (s[i] && ft_strncmp(&s[i], cs, cs_len) == 0)
+			i += cs_len;
+		if (s[i])
 		{
-			new_str = strn_alloc_and_cpy(&str[i], pos);
-			if (!new_str)
-				return (NULL);
-			str_da_append(&da, new_str);
-			pos += ft_strlen(charset);
+			n++;
+			while (s[i] && ft_strncmp(&s[i], cs, cs_len) != 0)
+				i++;
 		}
-		i += pos;
 	}
-	str_da_append(&da, NULL);
-	return (da.items);
+	return (n);
 }
 
-static char	*strn_alloc_and_cpy(char *str, size_t until)
+static char	*next_token(char *s, char *cs, size_t cs_len, size_t *pos)
 {
-	size_t	i;
-	char	*new_str;
+	size_t	start;
 
-	new_str = malloc(until + 1);
-	if (!new_str)
+	while (s[*pos] && ft_strncmp(&s[*pos], cs, cs_len) == 0)
+		*pos += cs_len;
+	if (!s[*pos])
+		return (NULL);
+	start = *pos;
+	while (s[*pos] && ft_strncmp(&s[*pos], cs, cs_len) != 0)
+		(*pos)++;
+	return (ft_substr(s, start, *pos - start));
+}
+
+char	**ft_split_by(char *str, char *charset)
+{
+	size_t	cs_len;
+	char	**result;
+	size_t	i;
+	size_t	tok_i;
+
+	cs_len = ft_strlen(charset);
+	result = malloc((count_toks(str, charset, cs_len) + 1) * sizeof(char *));
+	if (!result)
 		return (NULL);
 	i = 0;
-	while (i < until)
+	tok_i = 0;
+	result[tok_i] = next_token(str, charset, cs_len, &i);
+	while (result[tok_i])
 	{
-		new_str[i] = str[i];
-		i++;
+		tok_i++;
+		result[tok_i] = next_token(str, charset, cs_len, &i);
 	}
-	new_str[until] = '\0';
-	return (new_str);
+	return (result);
 }
 
-static long	find_in_str(char *haystack, char *needle)
+char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
+	char	delim[2];
 
-	i = 0;
-	while (haystack[i])
-	{
-		j = 0;
-		while (needle[j] && haystack[i + j] && needle[j] == haystack[i + j])
-			j++;
-		if (j == ft_strlen(needle))
-			return (i);
-		i++;
-	}
-	return (-1);
+	delim[0] = c;
+	delim[1] = '\0';
+	return (ft_split_by((char *)s, delim));
 }
 
-static void	str_da_append(t_str_da *da, char *str)
+#ifdef TESTING
+
+int	main(void)
 {
-	char	**new_ptr;
-	size_t	i;
+	char	**r;
+	size_t	p;
+	bool	ok;
 
-	if (da->cap <= da->size + 1)
-	{
-		da->cap *= 2;
-		new_ptr = malloc(sizeof(char **) * da->cap);
-		if (!new_ptr)
-			return ;
-		i = 0;
-		while (i < da->size)
-		{
-			new_ptr[i] = da->items[i];
-			i++;
-		}
-		free(da->items);
-		da->items = new_ptr;
-	}
-	da->items[da->size++] = str;
+	p = 0;
+	r = ft_split("hello world", ' ');
+	ok = (r != NULL);
+	ok = (ok && !strcmp(r[0], "hello") && !strcmp(r[1], "world") && !r[2]);
+	ft_print_line(0, 3, ok);
+	p += ok;
+	r = ft_split(",a,", ',');
+	ok = (r != NULL);
+	ok = (ok && !strcmp(r[0], "a") && !r[1]);
+	ft_print_line(1, 3, ok);
+	p += ok;
+	r = ft_split("", ',');
+	ok = ((r != NULL) && !r[0]);
+	ft_print_line(2, 3, ok);
+	p += ok;
+	ft_print_summary("ft_split", p, 3);
+	return (p != 3);
 }
+
+#endif
