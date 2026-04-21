@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 19:00:25 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 22:10:42 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_str_da {
 	size_t	cap;
 }	t_str_da;
 
-char	**ft_split(char *str, char *charset);
+char	**ft_split(char const *s, char c);
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
