@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 16:52:21 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 17:35:55 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_list {
 }	t_list;
 
 t_list	*ft_lstnew(void *content);
+
+void	ft_lstadd_front(t_list **lst, t_list *new);
 
 # ifdef TESTING
 
