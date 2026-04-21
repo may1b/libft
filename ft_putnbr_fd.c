@@ -6,31 +6,36 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:40:27 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 16:49:27 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 20:12:45 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_itoa_buf(int n, char *str)
+static char	*ft_itoa_buf(int n, char *buf)
 {
-	int		len;
-	int		neg;
+	int	len;
+	int	tmp;
 
-	neg = (n < 0);
-	if (!neg)
+	len = (n < 0);
+	if (!len)
 		n = -n;
-	str[len] = '\0';
-	if (neg)
-		str[0] = '-';
+	tmp = n;
+	if (tmp == 0)
+		tmp = -1;
+	while (tmp != 0 && ++len)
+		tmp /= 10;
+	buf[len] = '\0';
 	if (n == 0)
-		str[0] = '0';
+		return (buf[0] = '0', buf);
+	if (len != (n < 0))
+		buf[0] = '-';
 	while (n != 0)
 	{
-		str[--len] = '0' - (n % 10);
+		buf[--len] = '0' - (n % 10);
 		n /= 10;
 	}
-	return (str);
+	return (buf);
 }
 
 void	ft_putnbr_fd(int n, int fd)
