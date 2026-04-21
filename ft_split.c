@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:40:41 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 21:44:15 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 22:11:32 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*next_token(char *s, char *cs, size_t cs_len, size_t *pos)
 	return (ft_substr(s, start, *pos - start));
 }
 
-char	**ft_split_by(char *str, char *charset)
+static char	**ft_split_by(char *str, char *charset)
 {
 	size_t	cs_len;
 	char	**result;
