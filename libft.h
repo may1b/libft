@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 18:26:28 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 18:39:35 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 
 void	ft_lstclear(t_list **lst, void (*del)(void *));
+
+void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 # ifdef TESTING
 
