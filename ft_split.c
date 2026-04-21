@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:40:41 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 17:39:31 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 18:33:38 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ static long	find_in_str(char *haystack, char *needle)
 		j = 0;
 		while (needle[j] && haystack[i + j] && needle[j] == haystack[i + j])
 			j++;
-		printf("| i: '%ld', j: '%ld' |\n", i, j);
 		if (j == ft_strlen(needle))
 			return (i);
 		i++;
