@@ -6,14 +6,14 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:40:41 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 18:38:07 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 20:23:29 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stddef.h>
 #include <string.h>
-#define DA_INIT_CAP 5000
+#define DA_INIT_CAP	10 
 
 static void	str_da_append(t_str_da *da, char *str);
 static long	find_in_str(char *haystack, char *needle);
