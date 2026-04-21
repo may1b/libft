@@ -11,12 +11,7 @@
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdint.h>
-#ifdef TESTING
-# include "libft.h"
-#endif
-
-int	ft_memcmp(const void *s1, const void *s2, size_t n);
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -35,11 +30,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 }
 
 #ifdef TESTING
-// TODO: factor out the whole testing stuff to the header
-
-# define GREEN	"\x1b[32m"
-# define RED	"\x1b[31m"
-# define RESET	"\x1b[0m"	
 
 typedef struct s_test {
 	char	*area1;
@@ -47,48 +37,38 @@ typedef struct s_test {
 	size_t	n;
 }	t_test;
 
-bool	run_test(t_test test)
+static bool	run_test(t_test t)
 {
-	int	result;
-	int	libc_result;
+	int	fr;
+	int	lr;
 
-	result = ft_memcmp(test.area1, test.area2, test.n);
-	libc_result = memcmp(test.area1, test.area2, test.n);
-	return (result == libc_result);
-}
-
-void	print_tests(size_t n, bool results[static n], t_test tests[static n])
-{
-	size_t	i;
-
-	printf("TEST %s\n", "`ft_memcmp`");
-	i = 0;
-	while (i < n)
-	{
-		printf("%zu/%zu: [`%s`, `%s`, %zu] -> ", i + 1, n + 1, tests[i].area1,
-			tests[i].area2, tests[i].n);
-		if (results[i])
-			printf(GREEN"[PASSED]\n"RESET);
-		else
-			printf(GREEN"[FAILED]\n"RESET);
-		i++;
-	}
+	fr = ft_memcmp(t.area1, t.area2, t.n);
+	lr = memcmp(t.area1, t.area2, t.n);
+	return ((fr < 0 && lr < 0) || (fr > 0 && lr > 0)
+		|| (fr == 0 && lr == 0));
 }
 
 int	main(void)
 {
 	static t_test	tests[] = {{"", "", 0}, {"a", "a", 1},
 	{"abc", "abc", 3}, {"a", "b", 1}};
-	bool			results[(sizeof(tests) / sizeof(t_test))];
+	size_t			count;
+	size_t			passed;
 	size_t			i;
+	bool			ok;
 
+	count = sizeof(tests) / sizeof(t_test);
+	passed = 0;
 	i = 0;
-	while (i < (sizeof(tests) / sizeof(t_test)))
+	while (i < count)
 	{
-		results[i] = run_test(tests[i]);
+		ok = run_test(tests[i]);
+		ft_print_line(i, count, ok);
+		passed += ok;
 		i++;
 	}
-	print_tests(sizeof(tests) / sizeof(t_test), results, tests);
+	ft_print_summary("ft_memcmp", passed, count);
+	return (passed != count);
 }
 
 #endif
