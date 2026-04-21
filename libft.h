@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 15:06:15 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/21 15:33:58 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <unistd.h>
 # ifdef TESTING
 #  include <stdio.h>
 #  include <string.h>
@@ -90,6 +91,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strtrim(char const *s1, char const *set);
 
 char	*ft_itoa(int n);
+
+void	ft_putchar_fd(char c, int fd);
 
 # ifdef TESTING
 
