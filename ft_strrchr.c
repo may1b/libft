@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:44:18 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/14 15:16:45 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/24 19:16:55 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strrchr(const char *s, int c)
 	while (strlen_)
 	{
 		strlen_--;
-		if (s[strlen_] == (unsigned char)c)
+		if ((unsigned char)((s[strlen_])) == (unsigned char)c)
 			return ((char *)&s[strlen_]);
 	}
 	return (NULL);
