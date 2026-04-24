@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 12:56:24 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 22:10:42 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/24 15:32:10 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 # define LIBFT_H
 # include <stddef.h>
+# include <stdint.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
