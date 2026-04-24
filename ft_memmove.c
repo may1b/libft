@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:26:29 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/13 21:50:26 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/24 19:05:33 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,16 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char		*destination;
-	const char	*source;
 	size_t		i;
 
 	if (!dest && !src)
 		return (dest);
-	destination = (char *)dest;
-	source = (const char *)src;
-	if (destination < source)
+	i = 0;
+	if (dest < src)
 	{
-		i = 0;
 		while (i < n)
 		{
-			destination[i] = source[i];
+			((char *)dest)[i] = ((const char *)src)[i];
 			i++;
 		}
 	}
@@ -39,7 +35,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		while (n > 0)
 		{
 			n--;
-			destination[n] = source[n];
+			((char *)dest)[n] = ((const char *)src)[n];
 		}
 	}
 	return (dest);
