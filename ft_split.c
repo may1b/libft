@@ -21,7 +21,7 @@ static size_t	count_toks(char const *s, char c)
 	i = 0;
 	while (s[i])
 	{
-		while (s[i] == c)
+		while (s[i] && s[i] == c)
 			i++;
 		if (s[i])
 		{
@@ -37,7 +37,7 @@ static char	*next_token(char const *s, char c, size_t *pos)
 {
 	size_t	start;
 
-	while (s[*pos] == c)
+	while (s[*pos] && s[*pos] == c)
 		(*pos)++;
 	if (!s[*pos])
 		return (NULL);
