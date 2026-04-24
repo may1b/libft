@@ -1,4 +1,5 @@
 a.out
 compile_flags.txt
 *.o
-libft.a
+*.a
+*.so
