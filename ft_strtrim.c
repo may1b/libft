@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:36:52 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 14:36:52 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/24 19:20:11 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	end;
 	char	*new_str;
 
+	if (!s1 || !set)
+		return (NULL);
 	start = 0;
 	while (s1[start] && char_is_one_of(s1[start], set))
 		start++;
