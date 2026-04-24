@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:29:58 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 14:28:52 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/24 19:21:02 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	new_strlen;
 	char	*substr;
 
+	if (!s)
+		return (NULL);
 	if (ft_strlen(s) < start)
 		return (ft_calloc(1, 1));
 	new_strlen = ft_strlen(&s[start]);
