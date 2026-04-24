@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:40:41 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/21 22:11:32 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/24 19:14:56 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	tok_i;
 
+	if (!s)
+		return (NULL);
 	result = malloc((count_toks(s, c) + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
