@@ -6,7 +6,7 @@
 /*   By: magrass <magrass@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 21:38:13 by magrass           #+#    #+#             */
-/*   Updated: 2026/04/20 21:42:10 by magrass          ###   ########.fr       */
+/*   Updated: 2026/04/24 19:18:00 by magrass          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	size_t	i;
 	char	*new_str;
 
+	if (!s || !f)
+		return (NULL);
 	str_size = ft_strlen(s);
 	new_str = ft_calloc(str_size + 1, 1);
 	if (!new_str)
