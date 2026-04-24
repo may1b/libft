@@ -10,23 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c);
-
-static char	*ft_strupcase(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i] -= 'a' - 'A';
-		i++;
-	}
-	return (str);
-}
+int	ft_toupper(int c);
 
 int	ft_toupper(int c)
 {
-	return (*ft_strupcase((char *)&c));
+	if (c >= 'a' && c <= 'z')
+		return (c - ('a' - 'A'));
+	return (c);
 }
